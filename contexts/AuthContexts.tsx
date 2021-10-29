@@ -46,7 +46,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
             setCookie(
                 undefined,
                 'ignauth.refreshToken',
-                refreshToken
+                refreshToken,
+                {
+                    maxAge: 60 * 60 * 24 * 30,
+                    path: '/'
+                }
             )
 
             setUser({
