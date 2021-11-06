@@ -1,5 +1,8 @@
 import { FormEvent, useContext, useState } from "react"
 import { useRouter } from 'next/router'
+import { GetServerSideProps } from "next"
+
+import { withSSRGuests } from '../utils/withSSRGuests'
 import { AuthContext } from "../contexts/AuthContexts"
 import styles from '../styles/Home.module.scss'
 
@@ -29,3 +32,9 @@ export default function Home() {
     </form>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRGuests(async ctx => {
+  return {
+    props: {}
+  }
+})

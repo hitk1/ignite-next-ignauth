@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios'
 import { parseCookies, setCookie } from 'nookies'
+import { signOut } from '../contexts/AuthContexts'
 
 let cookies = parseCookies()
 let isRefreshing = false
@@ -89,8 +90,11 @@ api.interceptors.response.use(
                     })
                 })
             } else {
-                //Deslogar usuarios
+                signOut()
             }
         }
+
+        //É importante que se o erro nao cair nas trativas acima, que ele "siga seu curso"
+        return Promise.reject(error)
     }
 )
